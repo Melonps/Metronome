@@ -30,13 +30,35 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+class CustomButton extends StatelessWidget {
+  const CustomButton({this.onTap, Key Key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 120,
+      width: 76,
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(28),
+      ),
+      alignment: Alignment.center,
+      child: Icon(
+        Icons.add,
+        color: Colors.black,
+      ),
+    );
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  final _audio = AudioCache();
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      _counter = _counter * 2 + 1;
     });
+    _audio.play('wav_botton.mp3');
   }
 
   @override
@@ -63,11 +85,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      floatingActionButton: CustomButton(
+        onTap: () {
+          _incrementCounter();
+        },
+      ),
+    ); // This trailing comma makes auto-formatting nicer for build methods.
   }
 }
