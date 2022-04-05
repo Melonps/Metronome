@@ -11,7 +11,6 @@ class Clock extends StatefulWidget {
 
 class _Clock extends State<Clock> {
   var _isStart = false;
-  var _timeString = '00:00:00';
   var _timer;
   int _count = 0;
   DateTime _startTime = DateTime.now();
@@ -23,12 +22,9 @@ class _Clock extends State<Clock> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: Text(_timeString, style: TextStyle(fontSize: 60)),
-          ),
           Container(
             width: 100,
-            height: 50,
+            height: 100,
             color: Colors.greenAccent,
             child: TextButton(
                 onPressed: _startTimer,
