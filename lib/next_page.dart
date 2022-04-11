@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Dart:async';
+import 'dart:async';
 import 'package:flutter/services.dart';
+import 'metro.dart';
 
 class NextPage extends StatefulWidget {
   @override
@@ -12,8 +13,7 @@ class NextPage extends StatefulWidget {
 class _NextPage extends State<NextPage> {
   final valueController = TextEditingController();
   var _isStart = false;
-  var _timer;
-
+  late Timer _timer;
   int _count = 0;
 
   @override
@@ -46,15 +46,17 @@ class _NextPage extends State<NextPage> {
   void _startTimer() {
     String test = valueController.text;
     int tempo = int.parse(test.isNotEmpty ? test : "0");
+    int waitTime = 60000 ~/ tempo;
+    Timer.periodic(Duration(milliseconds: waitTime), _test);
 
-    double waitTime = 60000 / tempo;
-
-    await Future.delayed(Duration(milliseconds: 60000 * 4 / tempo));
-    waitTime  = 60000 / tempo;
-    for(int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
       print("count");
-      await Future.delayed(Duration(milliseconds: waitTime));
+      Timer.periodic(Duration(milliseconds: waitTime), _onTimer);
     }
+  }
+
+  void _test() {
+    print("start");
   }
 
   void _onTimer(Timer timer) {
