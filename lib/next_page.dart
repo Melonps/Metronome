@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'button.dart';
 
 class NextPage extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _NextPage extends State<NextPage> {
               Padding(
                 padding: EdgeInsets.all(50.0),
               ),
+              MyButton(),
             ],
           ))),
     );
